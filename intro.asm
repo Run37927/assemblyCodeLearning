@@ -46,4 +46,82 @@ _start:
     div bx          ; ax % dx = dx:ax / bx
     ; dx:ax might be 32-bit value, i want to divide by a 16-bit, result be stored in ax, and remainder stored in dx
 
-    
+
+
+    ; flags register
+    ; carry flag bit CF = carry (1 yes, 0 no)
+    ; overflow flag OF
+    ; zero flag ZF (1 yes, 0 no) 15 - 15 = 0
+    ; sign flag SF (1 negative, 0 positive)
+    ; parity flag PF (1 even, 0 odd)
+
+    ; jump operation, jump to a specific label
+    jmp label1      ; create program flow that isn't linear
+    je label        ; jump equal. if the previous operation above this line results in two things equal each other, then jump
+    jne label       ; jump not equal. if the two are not equal, jump
+    jz              ; jump zero
+    ; add n to get opposite
+    jne             ; jump not zero
+    jc              ; jump carry
+    jo              ; jump overflow
+    jg              ; jump greater than
+    jge             ; jump greater than equal
+    jl              ; jump less than
+    jle             ; jump less than equal
+    js              ; jump sign flag
+    ja              ; jump above
+    jae             ; jump above equal
+    jb              ; jump below
+    jbe             ; jump below equal
+
+; call
+call label      ; saves current location in your code so you can return back
+
+; int a = 3
+; int b = 4
+; printf("hello")  call is used when the printf is being called. returns a pointer to this line of code
+
+;-----------------------------------------------------------
+cmp eax, ebx    ; compares eax - ebx. 大于0， 小于0， 等于0. Doesn't store anything, it updates the flag register
+
+cmp eax, 25
+ja label
+; if eax > 25, jump. otherwise continue to do whatever
+
+;-----------------shifting---------------------------
+shr eax, 4      ; shift eax to the right by 4 bits, which means divide by 2 four times
+shl eax, 2      ; shift eax to the left by 2 bits
+
+sar             ; same as shift right except it will keep the sign
+1111 0000
+1111 1000  shift to right once, but kept the sign bit (for this negative number)
+
+0100 0111
+0010 0011  shift to right once, kept the sign bit (for positive number)
+
+ror     ; rotate right
+rol     ; rotate left
+1111 0000
+1110 0001 rotate left?
+0111 1000 rotate right?
+
+;--------------masking--------------------------------
+1010 1010 since we only care about 10 in this number, we can use a mask, AND these two
+0011 0000
+---------
+0010 0000 now I get what I care about, which is 10
+
+
+eax = 1010 1010 1010 1010 1010 1010 1010 1010
+and eax, 0xFFFF0000     ; AND with this hex num, store result in eax
+
+1010 1010 1010 1010 1010 1010 1010 1010
+1111 1111 1111 1111 0000 0000 0000 0000
+---------------------------------------
+1010 1010 1010 1010 0000 0000 0000 0000     ; result
+
+shr eax, 16     ; shift eax to right by 16 bits
+ax
+
+
+
