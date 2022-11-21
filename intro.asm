@@ -124,4 +124,10 @@ shr eax, 16     ; shift eax to right by 16 bits
 ax
 
 
+------system calls-------
+mov eax, 1
+int 0x80    ;this is an interrupt
+or this:
+int 80h     ;this interrupt is going to raise a flag for the kernel, then kernel freeze, kernel thinks I need to handle this important event. kernel = processor
+
 
