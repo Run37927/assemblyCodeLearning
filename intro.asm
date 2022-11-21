@@ -15,14 +15,6 @@ section .text
 ; main:
 
 
--------------------------------------------
-; to compile and run
-; nasm -f elf32 -o example.o  example.asm
-; ld -m elf_i386 -o example example.o
-; ./example
--------------------------------------------
-
-
 _start:
     mov dest, src       ; move source to destination
     movzx eax, 3        ; put binary version of 3 (11) into a 32-bit register, it's gonna zero out the rest 30 bits
